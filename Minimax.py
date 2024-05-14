@@ -1,33 +1,35 @@
 import math
 
-def minimax( curDepth, node, maxTurn, scores, targetDepth, path):
+def minimax(curDepth, nodeIndex, scores, maxTurn, targetDepth, path):
+
     if curDepth == targetDepth:
-        return scores[node], path
+        return scores[nodeIndex], path
+    
+    if maxTurn:
+        leftscore, leftpath = minimax(curDepth+1, nodeIndex*2, scores, False, targetDepth, path + 'L')
+        rightscore, rightpath = minimax(curDepth+1, nodeIndex*2 + 1, scores, False, targetDepth, path + 'R')
+        if leftscore > rightscore:
+            return leftscore, leftpath
+        else:
+            return rightscore, rightpath
+        
+    else:
+        leftscore, leftpath = minimax(curDepth+1, nodeIndex*2, scores, True, targetDepth, path + 'L')
+        rightscore, rightpath = minimax(curDepth+1, nodeIndex*2 + 1, scores, True, targetDepth, path + 'R')
+        if leftscore < rightscore:
+            return leftscore, leftpath
+        else:
+            return rightscore, rightpath
     
 
-    if maxTurn: 
-        leftScore, leftPath = minimax(curDepth+1, node*2, False, scores, targetDepth, path+" L " )
-        rightScore, rightPath = minimax(curDepth+1, node*2 + 1, False, scores, targetDepth, path+" R " )
 
-        if leftScore > rightScore:
-            return leftScore,leftPath
-        else:
-            return rightScore,rightPath
-        
-    else: 
-        leftScore, leftPath = minimax(curDepth+1, node*2, True, scores, targetDepth, path+" L " )
-        rightScore, rightPath = minimax(curDepth+1, node*2 + 1, True, scores, targetDepth, path+" R " )
-
-        if leftScore < rightScore:
-            return leftScore,leftPath
-        else:
-            return rightScore,rightPath
-        
-
-score_string=input("Enter the scores: ")
-scores=[int(x) for x in score_string.split()]
+scores = []
+n = int(input("Enter the number of scores:"))
+print("Enter the Scores:")
+for i in range(n):
+    score = int(input())
+    scores.append(score)
 treeDepth = math.log(len(scores),2)
-result, path= minimax(0, 0, True, scores, treeDepth, "")
-
-print("The optimal value is: ", result)
-print("The path from the terminal value to root node is: ",path)
+result, path = minimax(0, 0, scores, True, treeDepth, "")
+print("Optimal Value: ",result)
+print("Optimal Path: ",path)
