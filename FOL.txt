@@ -1,0 +1,68 @@
+
+FOL Representation:
+• Predicates:
+。 User(x) : x is a user of the system.
+o Password(x, y) :x's password is y.
+。 Authorized(x, level) :x is authorized with level access (admin or user).
+• LoggedIn(x) :x is currently logged in.
+
+• Constants:
+。 John, Jane (usernames)
+。 secret123, letmein (passwords)
+
+﻿
+
+Facts (KB):
+1. User (John)
+2. Password (John, secret123)
+3. User (Jane)
+4. Authorized(John, admin)
+Rules:
+1. Password(x, y) ^ User (x)^ Enter Password(x, y) -> LoggedIn(x) (Successful login)
+2. LoggedIn(x) -> AccessGranted(x, level) ^ Authorized(x, level) (Grants access based on authorization level)
+3. User(x) -> CanRegister(x) (Users can register)
+4. User(x) Forgot Password (x) -> CanResetPass (x) (Users can reset passwords if forgotten)
+
+Questions and Reasoning:
+1. Forward Chaining:
+• Question: Can John access the admin panel after logging in successfully? Reasoning:
+•
+1. John is a user (User (John), fact 1).
+2. John knows the correct password ( Password (John, secret123), fact 2). 3. Applying rule 1, if John enters the correct password, he becomes logged in
+(LoggedIn (John) ).
+4. With LoggedIn (John), rule 2 grants access based on John's authorization level (Authorized(John, admin), fact 4).
+5. Therefore, John can access the admin panel ( AccessGranted (John, admin))
+2. Backward Chaining:
+⚫ Question: If John has access to the admin panel (AccessGranted (John,
+admin) ), can we determine his password?
+•
+Reasoning:
+1. We are given AccessGranted (John, admin).
+2. To derive this using rule 2, we need LoggedIn (John) and Authorized(John, admin).
+3. We can confirm Authorized(John, admin) from the facts (fact 4).
+4. However, to confirm Logged In (John), we cannot directly determine the password from AccessGranted (John, admin). Backward chaining might require additional information or verification steps.
+
+﻿
+
+FOL Login with Resolution Proof (Same Scenario):
+
+Clauses (Negation of Facts and Rules):
+1. ~ LoggedIn (John) (Negation of the goal: John is not logged in yet)
+2. Password (John, secret123) V User (John) V Enter Password (John,
+3.
+secret123) (Negation of rule 1)
+AccessGranted (John, admin) V-LoggedIn (John) V Authorized(John, admin) (Negation of rule 2)
+4. User (John) (Negation of fact 1)
+5. - Authorized(John, admin) (Negation of fact 4)
+Resolution Steps:
+1. Resolve clause 1 (→ LoggedIn (John)) with clause 2 (→ Password (John, secret123) V¬ User (John) V Enter Password (John, secret123)) on LoggedIn (John).
+• This results in:
+ר
+Password (John, secret123) V User (John) V
+- EnterPassword (John, secret123).
+2. Resolve the result of step 1 with fact 1 (User (John)) on User (John).
+ר
+• This results in: Password (John, secret123) V ¬ EnterPassword(John, secret123).
+3. Resolve the result of step 2 with the assumption Enter Password (John, secret123).
+• This leads to a contradiction: Password (John, secret123).
+Since we derived a contradiction, the original set of clauses (including the negation of the goal) is unsatisfiable. This implies that the original facts and rules can lead to John being logged in if he enters the correct password ( secret123).

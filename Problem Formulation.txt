@@ -1,0 +1,106 @@
+                               
+                               Vacuum Cleaner Problem
+
+
+### 1. Initial State:
+- The initial state represents the current location and cleanliness status of the vacuum cleaner's environment. It includes the location of the vacuum cleaner and the cleanliness status of each square or room in the environment.
+
+### 2. Actions:
+- The actions represent the movement and cleaning operations of the vacuum cleaner.
+- Movement actions involve moving the vacuum cleaner from one location to another within the environment.
+- Cleaning actions involve cleaning the current location of the vacuum cleaner.
+
+### 3. Successor Function / Transition Model:
+- Given the current state (location and cleanliness status), the successor function generates all possible states that can be reached by performing movement and cleaning actions.
+- The successor function ensures that actions are valid and do not violate any constraints.
+
+### 4. Goal Test:
+- The goal test checks whether the entire environment has been cleaned.
+- Explicit Goal Test: Compare the cleanliness status of each square or room with a predefined cleanliness threshold to determine if the environment is clean.
+- Implicit Goal Test: Evaluate whether the current state represents a fully cleaned environment.
+
+### 5. Path Cost:
+- In the Vacuum Cleaner Problem, the path cost can be defined as the number of movements and cleaning actions required to clean the entire environment.
+- Each movement action or cleaning action incurs a unit cost.
+
+
+                                  //8 puzzle Problem
+
+1. Initial State:
+
+    The initial state represents the configuration of the puzzle board, with some tiles placed in a specific arrangement, and one tile left empty.
+
+2. Actions:
+
+    The actions represent moving a tile into the empty space.
+    Each action involves sliding a tile (up, down, left, or right) into the empty space.
+
+3. Successor Function / Transition Model:
+
+    Given the current state (configuration of the puzzle board), the successor function generates all possible states that can be reached by moving a tile into the empty space.
+    The successor function ensures that actions are valid and do not violate the rules of the puzzle.
+
+4. Goal Test:
+
+    The goal test checks whether the puzzle has been solved, i.e., whether the tiles are arranged in the goal state configuration.
+    Explicit Goal Test: Compare the current state with the predefined goal state configuration.
+    Implicit Goal Test: Evaluate whether the current state represents a solved puzzle configuration.
+
+5. Path Cost:
+
+    In the 8-puzzle problem, the path cost can be defined as the number of moves (tile slides) required to reach the goal state from the initial state.
+    Each move of a tile into the empty space incurs a unit cost.
+
+                                     // TSP
+
+1. Initial State:
+
+    The initial state represents the starting city from which the traveling salesman begins their journey.
+
+2. Actions:
+
+    The actions represent moving from one city to another.
+    Each action involves traveling from the current city to a neighboring city that has not been visited yet.
+
+3. Successor Function / Transition Model:
+
+    Given a current city (partially completed tour), the successor function selects the next unvisited city to travel to, ensuring that it has not been visited before and is a neighbor of the current city.
+
+4. Goal Test:
+
+    The goal test checks whether all cities have been visited and the salesman returns to the starting city, forming a complete tour.
+    Explicit Goal Test: Ensure that all cities have been visited exactly once, and the salesman returns to the starting city.
+    Implicit Goal Test: Verify that the current tour is the shortest possible among all possible tours.
+
+5. Path Cost:
+
+    In the TSP, the path cost is the total distance traveled by the salesman to complete the tour.
+    The cost function calculates the sum of distances between consecutive cities in the tour, including the return trip to the starting city.
+
+                                    //N Queen Problem
+
+1. Initial State:
+
+    The initial state represents the empty chessboard where no queens are placed.
+
+2. Actions:
+
+    The actions represent placing a queen on an empty square of the chessboard.
+    Each action involves placing a queen in a row that does not conflict with the existing queens.
+
+3. Successor Function / Transition Model:
+
+    Given a current state (a partially filled chessboard), the successor function places a queen in the next available row that does not result in a conflict with existing queens.
+
+4. Goal Test:
+
+    The goal test checks whether all N queens have been successfully placed on the chessboard without attacking each other.
+    Explicit Goal Test: Compare the number of queens placed with the value of N.
+    Implicit Goal Test: Verify that no two queens attack each other (no queens share the same row, column, or diagonal).
+
+5. Path Cost:
+
+    In the N-Queens problem, the path cost can be defined as the number of moves (queen placements) required to reach the goal state.
+    Each placement of a queen incurs a unit cost.
+
+    Each placement of a queen incurs a unit cost.                                    
